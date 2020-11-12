@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="Models" defaultPhpNamingMethod="underscore">
+  <table name="cities" idMethod="native" phpName="Cities" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255"/>
+    <column name="county_id" phpName="CountyId" type="INTEGER" sqlType="int(11) unsigned"/>
+    <foreign-key foreignTable="counties" name="cities_ibfk_1">
+      <reference local="county_id" foreign="id"/>
+    </foreign-key>
+    <index name="county_id">
+      <index-column name="county_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="city_places" idMethod="native" phpName="CityPlaces" namespace="Models" isCrossRef="true">
+    <!-- <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/> -->
+    <column name="city_id" phpName="CityId" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true"/>
+    <column name="place_id" phpName="PlaceId" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true"/>
+    <foreign-key foreignTable="cities" name="city_places_ibfk_1">
+      <reference local="city_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="places" name="city_places_ibfk_2">
+      <reference local="place_id" foreign="id"/>
+    </foreign-key>
+    <index name="city_id">
+      <index-column name="city_id"/>
+    </index>
+    <index name="place_id">
+      <index-column name="place_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="city_railroads" idMethod="native" phpName="CityRailroads" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="city_id" phpName="CityId" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="railroad_id" phpName="RailroadId" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <foreign-key foreignTable="cities" name="city_railroads_ibfk_1">
+      <reference local="city_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="railroads" name="city_railroads_ibfk_2">
+      <reference local="railroad_id" foreign="id"/>
+    </foreign-key>
+    <index name="city_id">
+      <index-column name="city_id"/>
+    </index>
+    <index name="railroad_id">
+      <index-column name="railroad_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="city_road_aliases" idMethod="native" phpName="CityRoadAliases" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="city_road_id" phpName="CityRoadId" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="alias" phpName="Alias" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="city_roads" name="city_road_aliases_ibfk_1">
+      <reference local="city_road_id" foreign="id"/>
+    </foreign-key>
+    <index name="city_road_id">
+      <index-column name="city_road_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="city_roads" idMethod="native" phpName="CityRoads" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="road_id" phpName="RoadId" type="INTEGER" sqlType="int(11) unsigned"/>
+    <column name="city_id" phpName="CityId" type="INTEGER" sqlType="int(11) unsigned"/>
+    <foreign-key foreignTable="roads" name="city_roads_ibfk_2">
+      <reference local="road_id" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="cities" name="city_roads_ibfk_3">
+      <reference local="city_id" foreign="id"/>
+    </foreign-key>
+    <index name="road_id">
+      <index-column name="road_id"/>
+    </index>
+    <index name="city_id">
+      <index-column name="city_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="counties" idMethod="native" phpName="Counties" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="100"/>
+    <column name="state_id" phpName="StateId" type="INTEGER" sqlType="int(11) unsigned" required="true"/>
+    <foreign-key foreignTable="states" name="counties_ibfk_1">
+      <reference local="state_id" foreign="id"/>
+    </foreign-key>
+    <index name="state_id">
+      <index-column name="state_id"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="place_sub_types" idMethod="native" phpName="PlaceSubTypes" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="type" phpName="Type" type="VARCHAR" size="255"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="place_types" idMethod="native" phpName="PlaceTypes" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="type" phpName="Type" type="VARCHAR" size="255"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="places" idMethod="native" phpName="Places" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="place" phpName="Place" type="VARCHAR" size="255"/>
+    <column name="place_type" phpName="PlaceType" type="INTEGER" sqlType="int(11) unsigned"/>
+    <column name="place_sub_type" phpName="PlaceSubType" type="INTEGER" sqlType="int(11) unsigned"/>
+    <foreign-key foreignTable="place_types" name="places_ibfk_2">
+      <reference local="place_type" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="place_sub_types" name="places_ibfk_3">
+      <reference local="place_sub_type" foreign="id"/>
+    </foreign-key>
+    <index name="place_type">
+      <index-column name="place_type"/>
+    </index>
+    <index name="place_sub_type">
+      <index-column name="place_sub_type"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="railroads" idMethod="native" phpName="Railroads" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="railroad" phpName="Railroad" type="VARCHAR" size="255"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="road_types" idMethod="native" phpName="RoadTypes" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="type" phpName="Type" type="VARCHAR" size="50"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="roads" idMethod="native" phpName="Roads" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255"/>
+    <column name="type" phpName="Type" type="INTEGER" sqlType="int(11) unsigned"/>
+    <foreign-key foreignTable="road_types" name="roads_ibfk_1">
+      <reference local="type" foreign="id"/>
+    </foreign-key>
+    <index name="type">
+      <index-column name="type"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="states" idMethod="native" phpName="States" namespace="Models">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="state" phpName="State" type="VARCHAR" size="50"/>
+    <column name="abbrevation" phpName="Abbrevation" type="VARCHAR" size="2"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

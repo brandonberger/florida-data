@@ -1,0 +1,44 @@
+:root {
+    --dark-bg: #4770FF;
+}
+
+.side-nav {
+    background-color: var(--dark-bg);
+    height: 100%;
+}
+
+.side-nav ul {
+    list-style: none;
+    color: white;
+}
+
+.side-nav ul li {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 15px 0px;
+}
+
+.side-nav ul a:hover {
+    text-decoration: none;
+}
+
+.list-item {
+    width: 100%;
+    height: 100px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, .5);
+    margin: 10px 0px;
+    color: white;
+    font-size: 20px;
+    cursor:pointer;
+    transition: border 2s;
+
+}
+
+.list-item:hover {
+    border-bottom: solid 5px white;
+}

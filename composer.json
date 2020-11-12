@@ -1,0 +1,16 @@
+{
+    "require": {
+        "propel/propel": "~2.0@dev",
+        "filp/whoops": "^2.1",
+        "klein/klein": "~2.1.2"
+    },
+
+    "autoload": {
+      "psr-4": {
+      	  "Config\\": "src/Config/",
+          "Models\\": "Models/",
+          "Controllers\\": "src/Controllers/",
+          "Library\\": "src/Library"
+      }
+  }
+}
